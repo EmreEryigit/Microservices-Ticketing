@@ -24,3 +24,19 @@ build:
         manual:
           - src: "**/*.js"
             dest: .
+    - image: emreeryigit/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+    - image: emreeryigit/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .           

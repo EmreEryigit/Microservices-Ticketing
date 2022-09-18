@@ -6,7 +6,6 @@ const HomePage = ({ currentUser }) => {
 };
 
 HomePage.getInitialProps = async (context) => {
-    console.log("Home page");
     const client = buildClient(context);
     const { data } = await client.get("/api/users/currentuser");
     return data;
