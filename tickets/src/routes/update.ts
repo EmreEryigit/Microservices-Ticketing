@@ -35,7 +35,13 @@ router.put(
             price: req.body.price,
         });
         await ticket.save();
-        new TicketUpdatedPublisher(natsWrapper.client).publish(ticket);
+        new TicketUpdatedPublisher(natsWrapper.client).publish({
+            id: ticket.id,
+            title: ticket.title,
+            price: ticket.price,
+            userId: ticket.userId,
+            version: ticket.version,
+        });
 
         res.send(ticket); // sending the updated and saved version
     }
