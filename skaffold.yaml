@@ -39,4 +39,20 @@ build:
       sync:
         manual:
           - src: src/**/*.ts
-            dest: .           
+            dest: .
+    - image: emreeryigit/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+    - image: emreeryigit/payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .

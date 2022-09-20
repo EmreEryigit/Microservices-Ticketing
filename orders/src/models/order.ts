@@ -2,20 +2,21 @@ import { OrderStatus } from "@biletx/common";
 import mongoose from "mongoose";
 import { TicketDoc } from "./ticket";
 
-export {OrderStatus}
+export { OrderStatus };
 
 interface OrderAttrs {
     userId: string;
     status: OrderStatus;
     expiresAt: Date;
-      ticket: TicketDoc
+    ticket: TicketDoc;
 }
 interface OrderDoc extends mongoose.Document {
     id: string;
     userId: string;
     status: OrderStatus;
     expiresAt: Date;
-    ticket: TicketDoc
+    ticket: TicketDoc;
+    version: number;
 }
 interface OrderModel extends mongoose.Model<OrderDoc> {
     build(attrs: OrderAttrs): OrderDoc;
@@ -42,6 +43,8 @@ const orderSchema = new mongoose.Schema(
         },
     },
     {
+        optimisticConcurrency: true,
+        versionKey: "version",
         toJSON: {
             transform(doc, ret) {
                 ret.id = ret._id;

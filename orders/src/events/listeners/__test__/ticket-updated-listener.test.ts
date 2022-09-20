@@ -58,8 +58,7 @@ it("does not call ack if the event has a skipped version", async () => {
 
     data.version = 10;
 
-        await listener.onMessage(data, msg).catch(err => console.log(err));
-
+    await listener.onMessage(data, msg).catch((err) => console.log(err));
 
     expect(msg.ack).not.toHaveBeenCalled();
 });
