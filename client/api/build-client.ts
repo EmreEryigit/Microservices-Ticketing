@@ -1,6 +1,8 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
+import { NextPageContext } from "next";
+import { AppContext } from "next/app";
 
-const buildClient = ({ req }) => {
+const buildClient = ({ req }: AppContext["ctx"]): AxiosInstance => {
     if (typeof window === "undefined") {
         // we are on the server
 
@@ -8,7 +10,8 @@ const buildClient = ({ req }) => {
         return axios.create({
             baseURL:
                 "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
-            headers: req.headers,
+            // @ts-ignore
+            headers: req!.headers,
         });
 
         //http://SERVICENAME.NAMESPACE.svc.cluster.local
